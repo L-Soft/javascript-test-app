@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>테스트 코드</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>고객 명단</h3>
+    <div id="app">
+        <table class="table table-striped">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>주소</th>
+                <th>통합</th>
+                <th>버튼</th>
+            </tr>
+            <tr v-for="(customer, index) in customers" is="customer" :customer="customer" :ix="index"></tr>
+        </table>
+    </div>
+    <pre>{{ vm.$data.customers }}</pre>
+</div>
+<template id="template-story-raw">
+    <tr>
+        <td v-text="ix + 1"></td>
+        <td>
+            <input v-if="customer[3]" v-model="customer[0]" class="form-control">
+            </input>
+            <span v-else>
+                {{customer[0]}}
+            </span>
+        </td>
+        <td>{{ customer | customerItem('1', ix) | debug }}</td>
+        <td>{{ customer | customerItem('2') }}</td>
+        <td>{{ customer | total }}</td>
+        <td>
+            <div class="btn-group" v-if="!customer[3]">
+                <button class="btn btn-primary">업데이트</button>
+                <button class="btn btn-default" @click="editCustomer(customer, ix)">수정</button>
+                <button class="btn btn-danger">삭제</button>
+            </div>
+            <div class="btn-group" v-else>
+                <button v-if="customer" class="btn btn-primary">Update Story
+                </button>
+                <button v-else class="btn btn-success" >Save New Story</button>
+                <button @click="customer=false" class="btn btn-default">Cancel</button>
+            </div>
+        </td>
+    </tr>
+</template>
+
+<script src="bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="src/data.js"></script>
+<script type="text/javascript" src="src/customer.component.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
