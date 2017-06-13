@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vueJS - event example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app" class=".container">
+        <div class="page-header">
+            <h1>이벤트 청취</h1>
+        </div>
+        <button @click="conunt += 1" type="button" class="btn btn-lg btn-primary .col-xs-6 .col-md-4">Add 1</button>
+        <button @click="conunt += 2" type="button" class="btn btn-lg btn-primary">Add 2</button>
+        <button @click="conunt += 3" type="button" class="btn btn-lg btn-primary">Add 3</button>
+        <div class="alert alert-success" role="alert">
+            위 버튼을 클릭한 횟수는 <strong>{{conunt}}</strong> 번 입니다.
+        </div>
+        <br>
+        <div class="page-header">
+            <h1>메소드 이벤트 핸들러</h1>
+        </div>
+        <button @click="greet($event, '1')" type="button" class="btn btn-lg btn-primary">Add 1</button>
+        <button @click="greet($event, '2')" type="button" class="btn btn-lg btn-primary">Add 2</button>
+        <button @click="greet($event, '3')" type="button" class="btn btn-lg btn-primary">Add 3</button>
+        <div class="alert alert-success" role="alert">
+            위 버튼을 클릭한 횟수는 <strong>{{conunt}}</strong> 번 입니다.
+        </div>
+        <br>
+        <div class="page-header">
+            <h1>인라인 이벤트 핸들러</h1>
+        </div>
+        <button @click="eventBtn($event, '신세계 상품권')" type="button" class="btn btn-lg btn-primary">당첨!</button>
+        <button @click="eventBtn($event, '포인트 1,000점')" type="button" class="btn btn-lg btn-primary">당첨!</button>
+        <button @click="eventBtn($event, '여행 상품권')" type="button" class="btn btn-lg btn-primary">당첨!</button>
+        <button @click="eventBtn($event, '삭제')" type="button" class="btn btn-lg btn-primary">삭제</button>
+        <div v-if="coupon.length > 0" class="alert alert-success" role="alert">
+            상품 : <strong>{{coupon}}</strong>
+        </div>
+        <br>
+        <div class="page-header">
+            <h1>키 수식어</h1>
+        </div>
+        <input @keyup.13="submit($event)">
+        <input @keyup.enter="submit($event)">
+    </div>
+
+    <script src="../../bower_components/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data: {
+                conunt : 0,
+                name: 'Vue.js',
+                coupon: ""
+            },
+            methods : {
+                greet : (event, str) => {
+                    var number = event.target.innerHTML.split(" ")[1];
+                    app.$data.conunt += (number * 1);
+                    console.log(`str : ${str}`);
+                },
+                eventBtn : (event, str) => {
+                    app.$data.coupon = str === '삭제' ? "" : str;
+                },
+                submit : (event) => {
+                    // https://css-tricks.com/snippets/javascript/javascript-keycodes/
+                    if (event.target.value && event.target.value.length === 0) {
+                        return;
+                    }
+                    console.log(`%csubmit : ${event.target.value}, submit.length ${event.target.value.length}`, 'color:red;font-size: 25px;');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
