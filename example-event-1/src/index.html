@@ -7,6 +7,9 @@
 </head>
 <body>
     <div id="app" class=".container">
+        <!--
+            이벤트
+        -->
         <div class="page-header">
             <h1>이벤트 청취</h1>
         </div>
@@ -24,7 +27,7 @@
         <button @click="greet($event, '2')" type="button" class="btn btn-lg btn-primary">Add 2</button>
         <button @click="greet($event, '3')" type="button" class="btn btn-lg btn-primary">Add 3</button>
         <div class="alert alert-success" role="alert">
-            위 버튼을 클릭한 횟수는 <strong>{{conunt}}</strong> 번 입니다.
+            위 버튼을 클릭한 횟수는 <strong>{{cnt}}</strong> 번 입니다.
         </div>
         <br>
         <div class="page-header">
@@ -43,21 +46,107 @@
         </div>
         <input @keyup.13="submit($event)">
         <input @keyup.enter="submit($event)">
+        <!--
+            폼 입력 바인딩 예제
+        -->
+        <br>
+        <br>
+        <div class="page-header">
+            <h1>폼 입력 바인딩</h1>
+        </div>
+        <input v-model="message" placeholder="여기를 수정해보세요" @keyup.enter="itemDelete($event)">
+        <p>메시지: {{ message }}</p>
+        <br>
+        <br>
+        <div class="page-header">
+            <h1>여러 줄을 가지는 메시지:</h1>
+        </div>
+        <p style="white-space: pre">{{mMessage}}</p>
+        <br>
+        <textarea v-model="mMessage" placeholder="여러줄을 입력해보세요"></textarea>
+        <!-- ~ -->
+        <!-- 체크 박스 -->
+        <!-- ~ -->
+        <div class="page-header">
+            <h1>체크 박스</h1>
+        </div>
+        <input type="checkbox" v-model="allChecked" @click="btnAll">
+        <label>all</label>
+        <template v-if="checkboxList" v-for="item in checkboxList">
+            <input :value="item.name" type="checkbox" v-model.lazy="item.checked" @click="checkboxEvent(item.checked)" :true-value="checkY" :false-value="checkN">
+            <label :for="item.name">{{item.name}}</label>
+        </template>
+        <!-- ~ -->
+        <!-- 선택 박스 -->
+        <!-- ~ -->
+        <div class="page-header">
+            <h1>선택 박스</h1>
+        </div>
+        <select @change="selecedBox($event)">
+            <option value="" selected>선택하세요</option>
+            <option v-for="option in options" :value="option.value">
+                {{ option.text }}
+            </option>
+        </select>
+        <select v-if="aOptions.length > 0">
+            <option value="" selected>선택하세요</option>
+            <option v-for="option in aOptions" :value="option.value">
+                {{ option.text }}
+            </option>
+        </select>
+        <select v-if="bOptions.length > 0">
+            <option value="" selected>선택하세요</option>
+            <option v-for="option in bOptions" :value="option.value">
+                {{ option.text }}
+            </option>
+        </select>
     </div>
 
     <script src="../../bower_components/vue/dist/vue.js"></script>
     <script>
         var app = new Vue({
             el : "#app",
-            data: {
-                conunt : 0,
-                name: 'Vue.js',
-                coupon: ""
+            data: function () {
+                return {
+                    conunt : 0,
+                    cnt : 0,
+                    name: 'Vue.js',
+                    coupon: "",
+                    message:"",
+                    mMessage:"",
+                    checkN: "N",
+                    checkY: "Y",
+                    allChecked:false,
+                    checkboxList: [
+                        {
+                            "name": "Jack",
+                            "checked" : "N"
+
+                        },
+                        {
+                            "name": "John",
+                            "checked" : "N"
+
+                        },
+                        {
+                            "name": "Mike",
+                            "checked" : "N"
+
+                        }
+                    ],
+                    options: [
+                        { text: '중국집', value: 'A' },
+                        { text: '일본집', value: 'B' },
+                        { text: '한국집', value: 'C' }
+                    ],
+                    aOptions: [],
+                    bOptions: [],
+                }
             },
             methods : {
                 greet : (event, str) => {
-                    var number = event.target.innerHTML.split(" ")[1];
-                    app.$data.conunt += (number * 1);
+                    let number = event.target.innerHTML.split(" ")[1];
+                    app.$data.cnt += (number * 1);
                     console.log(`str : ${str}`);
                 },
                 eventBtn : (event, str) => {
@@ -69,6 +158,60 @@
                         return;
                     }
                     console.log(`%csubmit : ${event.target.value}, submit.length ${event.target.value.length}`, 'color:red;font-size: 25px;');
+                },
+                itemDelete: (evnet) => {
+                    app.$data.message = "삭제함";
+                },
+                checkboxEvent: (state) => {
+                    if (state === "N" && app.$data.allChecked) {
+                        app.$data.allChecked = false;
+                        return;
+                    }
+
+                    if (state === "Y" && !(app.$data.checkboxList.find(item => item.checked === "N"))) {
+                        app.$data.allChecked = true;
+                    }
+                },
+                btnAll: () => {
+                    console.log("btnAll", app.$data.allChecked);
+                    let type = app.$data.allChecked === true ? "Y" : "N";
+                    app.$data.checkboxList.forEach(item => item.checked = type);
+
+//                    for (let iCnt = 0, len = app.$data.checkboxList.length; iCnt < len; iCnt++) {
+//                        app.$data.checkboxList[iCnt].checked = type;
+//                    }
+                },
+                selecedBox: (event) => {
+                    app.$data.aOptions = [];
+                    app.$data.bOptions = [];
+
+                    switch(event.target.value) {
+                        case "A": {
+                            console.log(event.target.value);
+                            app.$data.aOptions = [
+                                { text: '중국집-1', value: 'A1' },
+                                { text: '일본집-1', value: 'B1' },
+                                { text: '한국집-1', value: 'C1' }];
+                            break;
+                        }
+                        case "B": {
+                            console.log(event.target.value);
+                            app.$data.bOptions = [
+                                { text: '중국집-2', value: 'A1' },
+                                { text: '일본집-2', value: 'B1' },
+                                { text: '한국집-2', value: 'C1' }];
+                            break;
+                        }
+                        case "C": {
+                            console.log(event.target.value);
+                            break;
+                        }
+                        default: {
+                            console.log(event.target.value);
+                            app.$data.bOptions = [];
+                            app.$data.aOptions = [];
+                        }
+                    }
                 }
             }
         });
