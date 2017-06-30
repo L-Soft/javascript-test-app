@@ -1,0 +1,12 @@
+{
+  "name": "vuejs-example-code-test",
+  "version": "0.0.1",
+  "description": "vuejs-example-code-test",
+  "devDependencies": {
+  },
+  "scripts": {
+    "preinstall": "bower install",
+    "postinstall": "npm install",
+    "start": "http-server ./ -a 0.0.0.0 -p 8000 -i -c 0"
+  }
+}
