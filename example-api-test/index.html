@@ -5,22 +5,15 @@
     <title>example-api-test</title>
 </head>
 <body>
-<script src="../bower_components/systemjs/dist/system.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="../bower_components/promisejs/promise.js"></script>
 <script src="../bower_components/querystring/querystring.js"></script>
-<script>
-    System.config({
-        baseUrl: '../bower_components',
-        transpiler: 'plugin-babel',
-        map: {
-            'plugin-babel': 'https://unpkg.com/systemjs-plugin-babel/plugin-babel.js',
-            'systemjs-babel-build': 'https://unpkg.com/systemjs-plugin-babel/systemjs-babel-browser.js',
-        }
-    });
+<script src="../bower_components/vue/dist/vue.js"></script>
+<script src="../bower_components/vue-resource/dist/vue-resource.js"></script>
+<div id="app" class=".container">
 
-    SystemJS.import('index.js').then((r) => {
-        console.log(r);
-    });
-</script>
+</div>
+<script src="index.js"></script>
 </body>
 </html>

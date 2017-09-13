@@ -20,13 +20,16 @@ var lSoft = ((lSoft) => {
                 return promise.get(url, data).then(isCheck);
             }
             case HTTP.POST: {
-                break;
+                return promise.post(url, data).then(isCheck);
             }
             case HTTP.PUT: {
-                break;
+                return promise.put(url, data).then(isCheck);
             }
             case HTTP.DEL: {
-                break;
+                return promise.del(url, data).then(isCheck);
+            }
+            default: {
+
             }
         }
     };
