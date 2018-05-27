@@ -1,24 +1,24 @@
-개인적으로 VueJS 기능을 테스트 및 사용방법을 예제로 구현합니다.
+## JavaScript 코드 테스트용으로 사용하고 있습니다.
 
-### Install
+## IntelliJ (또는 JetBrains 제품) 필요한 플러그인
+1. Quokka
+1. DTO generato
+1. POJO to Json
+1. JSON Viewer
+1. String Manipulation
+1. Nyan Progress Bar
+
+## IntellIj 기능을 확인 필요한 기능
+1. Java Stream Debugger
+1. JVM Debuggger Memory View
+
+## IntelliJ, 메모리 할당량 늘리기
+메모리 할당하는 방법이 정리된 사이트
 ```
-$bower install bootstrap vue moment moment-timezone rivets
+http://forgiveall.tistory.com/405
 ```
 
+## VSCode 에디터에서 필요한 플러그인
+1. project manager
+2. vscode-icons
 
-### bower.json 파일의 의미
-```
-name: (필수값) 팩키지명
-version: 버전 정보
-main: 패키지의 엔드포인트
-ignore: 패키지를 설치할 때 bower가 무시할 파일 목록
-dependencies : 프로덕션에서 사용할 패키지 의존성 정보
-devDependencies : 개발용 패키지 의존성 정보
-
-```
-
-### bower.json 버전 정보
-```
-https://blog.outsider.ne.kr/1041 사이트 참조
-
-```
