@@ -23,6 +23,7 @@ http://forgiveall.tistory.com/405
 ```
 
 ## VSCode 에디터에서 필요한 플러그인
+
 1. project manager
 1. vscode-icons
 1. markdownlint
