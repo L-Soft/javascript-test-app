@@ -11,7 +11,7 @@ var lSoft = (function (lSoft, promise) {
 
     lSoft.p5Utils.debug = function (msg) {
         return msg;
-    }
+    };
 
     return lSoft;
 })(window.lSoft || {}, promise);
