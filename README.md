@@ -9,7 +9,7 @@
 1. String Manipulation
 1. Nyan Progress Bar
 
-## IntellIj 기능을 확인 필요한 기능
+## IntelliJ 기능을 확인 필요한 기능
 
 1. Java Stream Debugger
 1. JVM Debuggger Memory View

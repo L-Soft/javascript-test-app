@@ -48,6 +48,7 @@
             <table id="view" class="table">
                 <thead>
                     <tr>
+                        <th>선택</th>
                         <th>이름</th>
                         <th>휴대폰</th>
                         <th>이메일</th>
@@ -58,7 +59,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr rv-each-users=tempData>
+                    <tr rv-each-users="tempData">
+                        <th><input type="radio" id="contactChoice1" name="contact" rv-value="index" rv-on-click="userChange"></th>
                         <th>{ users | itemat 0 }</th>
                         <th>{ users | itemat 1 }</th>
                         <th>{ users | itemat 2 }</th>
