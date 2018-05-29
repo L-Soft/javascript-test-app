@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./res/css/bootstrap.css" rel="stylesheet">
+        <link href="./res/css/bootstrap-theme.css" rel="stylesheet">
+        <title>테스트 페이지</title>
+    </head>
+    <body role="document">
+        <div class="container theme-showcase" role="main" id="userAdd" style="display: none;">
+            <div class="page-header">
+                <h1>사용자 추가</h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>휴대폰</th>
+                        <th>이메일</th>
+                        <th>날짜</th>
+                        <th>주소</th>
+                        <th>도시</th>
+                        <th>우편번호</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><input type="text" class="form-control" placeholder="이름"      aria-describedby="basic-addon1"></th>
+                        <th scope="row"><input type="text" class="form-control" placeholder="휴대폰"    aria-describedby="basic-addon1"></th>
+                        <th scope="row"><input type="text" class="form-control" placeholder="이메일"    aria-describedby="basic-addon1"></th>
+                        <th scope="row"><input type="text" class="form-control" placeholder="날짜"      aria-describedby="basic-addon1"></th>
+                        <th scope="row"><input type="text" class="form-control" placeholder="주소"      aria-describedby="basic-addon1"></th>
+                        <th scope="row"><input type="text" class="form-control" placeholder="도시"      aria-describedby="basic-addon1"></th> 
+                        <th scope="row"><input type="text" class="form-control" placeholder="우편번호"  aria-describedby="basic-addon1"></th>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary">저장</button>
+            <button type="button" class="btn btn-default">취소</button>
+        </div>
+        
+        <div class="container theme-showcase" role="main">
+            <div class="page-header">
+                <h1>고객 리스트</h1>
+            </div>
+            <button type="button" class="btn btn-xs btn-primary">고객 추가</button>
+            <table id="view" class="table">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>휴대폰</th>
+                        <th>이메일</th>
+                        <th>날짜</th>
+                        <th>주소</th>
+                        <th>도시</th>
+                        <th>우편번호</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyList">
+                    <tr>
+                        <th>{ users | itemat 0 }</th>
+                        <th>{ users | itemat 1 }</th>
+                        <th>{ users | itemat 2 }</th>
+                        <th>{ users | itemat 3 }</th>
+                        <th>{ users | itemat 4 }</th>
+                        <th>{ users | itemat 5 }</th>
+                        <th>{ users | itemat 6 }</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="./res/js/promise.min.js"></script>
+    <script type="text/javascript" src="./res/js/lSoft.p5Utils.js"></script>
+    <script type="text/javascript" src="./res/js/lSoft.p5Api.js"></script>
+    <script type="text/javascript" src="./res/json/tmp.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tbodyList").empty();
+            var tbody_list = "";
+            
+            for (var iCnt = 0, iLen = tempData.data.length; iCnt < iLen; iCnt++) {
+                tbody_list += "<tr>";
+                (function (_data) {
+                    for (var jCnt = 0, jLen = _data.length; jCnt < jLen; jCnt++) {
+                        tbody_list += "<th>" + _data[jCnt] + "</th>";
+                    }
+                    tbody_list +="</tr>";
+                })(tempData.data[iCnt]);
+            }
+            $("#tbodyList").append(tbody_list);
+        });
+    </script>
+</html>

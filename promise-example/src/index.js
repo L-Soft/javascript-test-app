@@ -30,12 +30,8 @@
     };
 
     var scope = {};
-    scope.editMode = true;
     scope.newUser = {};
     scope.tempData = window.tempData.data;
-
-    scope.userTable = {};
-    scope.userTable.trBgColor = null;
     
     scope.newUserFieldClear = function () {
         var _newUser = scope.newUser, keys = Object.keys(_newUser);
@@ -43,48 +39,14 @@
             _newUser[keys[iCnt]] = "";
         }
     };
-
-    scope.trTagClear = function () {
-        if (scope.userTable.trBgColor !== null) {
-            scope.userTable.trBgColor.removeAttr("bgcolor");
-            scope.userTable.trBgColor = null;
-        }
-    };
-
+ 
     scope.userAdd = function () {
         console.log("userAdd");
-        scope.editMode = false;
         $("#userAdd").removeAttr("style");
-    };
-
-    scope.userChange = function () {
-        scope.trTagClear();
-
-        if (scope && scope.editMode && scope.tempData && scope.newUser) {
-            var index = $(this).val(),
-                currentUser = scope.tempData[index];
-
-            scope.newUser.name    = currentUser[0];
-            scope.newUser.phone   = currentUser[1];
-            scope.newUser.email   = currentUser[2];
-            scope.newUser.date    = currentUser[3];
-            scope.newUser.addr    = currentUser[4];
-            scope.newUser.city    = currentUser[5];
-            scope.newUser.zipCode = currentUser[6];
-
-            $(this).attr("checked", false);
-            $("#userAdd").removeAttr("style");
-
-            scope.userTable.trBgColor = $(this).parents("tr");
-            scope.userTable.trBgColor.attr("bgcolor", "#f1f1f1");
-        }
     };
 
     scope.userCancel = function () {
         console.log("userCancel");
-        scope.newUserFieldClear();
-        scope.editMode = true;
-        scope.trTagClear();
         $("#userAdd").attr("style", "display: none");
     };
 
@@ -115,10 +77,8 @@
             return _array;
         })();
 
-        scope.editMode = true;
         scope.tempData.push(array);
         scope.newUserFieldClear();
-        scope.trTagClear();
         $("#userAdd").attr("style", "display: none");
     };
 
