@@ -82,8 +82,8 @@
             var tbody_list = "";
             
             for (var iCnt = 0, iLen = tempData.data.length; iCnt < iLen; iCnt++) {
-                tbody_list += "<tr>";
                 (function (_data) {
+                    tbody_list += "<tr>";
                     for (var jCnt = 0, jLen = _data.length; jCnt < jLen; jCnt++) {
                         tbody_list += "<th>" + _data[jCnt] + "</th>";
                     }
