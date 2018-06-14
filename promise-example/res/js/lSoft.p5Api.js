@@ -47,5 +47,16 @@ var lSoft = (function (lSoft, promise) {
         return http(HTTP.GET, url.test + getParameter(parameter), data || {});
     };
 
+    /* 고객님께서 promise 보다는 ajax */
+    lSoft.p5Api.getAjaxSupport = function (parameter, data) {
+        console.log(parameter, data);
+        return $.ajax({
+            url: url.test + getParameter(parameter),
+            data: data,
+            type: "GET",
+            dataType: "html"
+        });
+    };
+
     return lSoft;
 })(window.lSoft || {}, window.promise);

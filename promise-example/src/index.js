@@ -17,12 +17,20 @@
         
         console.log(testCode);
 
-        lSoft.p5Api.getSupport(parame).then(function (err, result) {
-            console.log(err, result);
+        // lSoft.p5Api.getSupport(parame).then(function (err, result) {
+        //     console.log(err, result);
+        // });
+
+        lSoft.p5Api.getAjaxSupport(parame).done(function (json) {
+            console.log("getAjaxSupport-json: ", json);
+        }).fail(function (xhr, status, errorThrown) {
+            console.log("xhr: ", xhr, "status: ", status, "errorThrown: ", errorThrown);
+        }).always(function (xhr, status) {
+            console.log("xhr: ", xhr, "status: ", status);
         });
     };
 
-    // testCode();
+    testCode();
     // test code
 
     rivets.formatters.itemat = function (value, index) {
@@ -31,7 +39,7 @@
 
     var scope = {};
     scope.newUser = {};
-    scope.tempData = window.tempData.data;
+    // scope.tempData = window.tempData.data;
     
     scope.newUserFieldClear = function () {
         var _newUser = scope.newUser, keys = Object.keys(_newUser);
